@@ -1,0 +1,58 @@
+1. Introduction to Dataset
+
+The dataset under consideration contains detailed records of Netflix’s content library, encompassing 7,789 entries and 11 attributes. It includes vital information about both Movies and TV Shows available on the platform. Key fields include:
+
+Title
+
+Director
+
+Cast
+
+Country of Origin
+
+Release Date
+
+Rating
+
+Duration
+
+Type (Movie or TV Show)
+
+Genres
+
+The dataset covers a broad timeline from 2008 to 2021, reflecting a diverse range of countries and genres, thus providing an extensive view of Netflix’s evolving content catalog.
+
+2. Problem Statement
+
+Netflix’s growing global footprint and competitive landscape necessitate a strategic approach to content management. With competitors like Amazon Prime, Disney+, and other regional OTT platforms emerging, Netflix needs to leverage data insights to sharpen its content strategy.
+
+Problem to address:
+How has Netflix’s content distribution (Movies vs. TV Shows, genres, and country-wise contributions) evolved over time? By analyzing these trends, the project aims to reveal audience preferences and content gaps, thereby supporting strategic decisions on content creation and acquisition.
+
+3. Importance of the Problem Statement
+
+Content trends analysis offers critical insights into Netflix’s operational and strategic focus. Understanding:
+
+The balance between Movies and TV Shows,
+
+Shifts in genre popularity,
+
+Country-specific content representation,
+
+will help Netflix tailor its offerings to audience demands across different regions and demographics. This is essential for maintaining competitive advantage, optimizing content budgets, and maximizing user engagement globally.
+
+4. Objectives
+
+Temporal Analysis: Examine the distribution of Movies and TV Shows over the years to detect shifts in content strategy.
+
+Genre Analysis: Identify the most prevalent genres and track how their popularity has changed.
+
+Geographical Analysis: Compare contributions from different countries to Netflix’s catalog, identifying market focus and diversity.
+
+5. Expected Outcomes
+
+A comprehensive understanding of Netflix’s evolving content strategy.
+
+Insights into top-performing genres and content categories that attract viewers.
+
+Data-driven strategic recommendations highlighting content types and regions Netflix should prioritize in future acquisitions and productions.
