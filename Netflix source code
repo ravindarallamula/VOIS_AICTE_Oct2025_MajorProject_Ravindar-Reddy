@@ -1,0 +1,89 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Load dataset
+df = pd.read_csv('netflix_titles.csv')
+
+# Basic info
+print(df.info())
+print(df.head())
+
+# Data cleaning and preprocessing
+# Convert 'date_added' to datetime, if available
+df['date_added'] = pd.to_datetime(df['date_added'])
+
+# Extract year from date_added for time trend analysis
+df['year_added'] = df['date_added'].dt.year
+
+# Check for missing values
+print(df.isnull().sum())
+
+# Fill missing 'country' with 'Unknown'
+df['country'] = df['country'].fillna('Unknown')
+
+# Fill missing 'rating' with 'Not Rated'
+df['rating'] = df['rating'].fillna('Not Rated')
+
+# --- 1. Distribution of Movies vs TV Shows over years ---
+
+plt.figure(figsize=(12,6))
+sns.countplot(data=df, x='year_added', hue='type')
+plt.title('Number of Movies vs TV Shows Added Each Year')
+plt.xlabel('Year Added')
+plt.ylabel('Count')
+plt.legend(title='Type')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+
+# --- 2. Most common genres and how popularity changed ---
+
+# 'listed_in' contains genres separated by commas - split and explode to analyze
+df_genres = df[['year_added', 'listed_in']].dropna()
+df_genres['listed_in'] = df_genres['listed_in'].str.split(', ')
+df_genres = df_genres.explode('listed_in')
+
+# Top 10 genres overall
+top_genres = df_genres['listed_in'].value_counts().head(10).index.tolist()
+
+# Filter only top genres for trend visualization
+df_top_genres = df_genres[df_genres['listed_in'].isin(top_genres)]
+
+plt.figure(figsize=(14,8))
+sns.countplot(data=df_top_genres, x='year_added', hue='listed_in')
+plt.title('Top 10 Genres Popularity Over Years')
+plt.xlabel('Year Added')
+plt.ylabel('Count')
+plt.legend(title='Genre', bbox_to_anchor=(1.05, 1), loc='upper left')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+
+# --- 3. Country-wise contributions to Netflix catalog ---
+
+# Some entries have multiple countries; split and explode
+df_country = df[['year_added', 'country']].dropna()
+df_country['country'] = df_country['country'].str.split(', ')
+df_country = df_country.explode('country')
+
+# Top 10 countries by total content
+top_countries = df_country['country'].value_counts().head(10).index.tolist()
+
+# Filter for top countries and plot
+df_top_countries = df_country[df_country['country'].isin(top_countries)]
+
+plt.figure(figsize=(14,8))
+sns.countplot(data=df_top_countries, x='year_added', hue='country')
+plt.title('Top 10 Countries Contributions Over Years')
+plt.xlabel('Year Added')
+plt.ylabel('Count')
+plt.legend(title='Country', bbox_to_anchor=(1.05, 1), loc='upper left')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+
+# Optional: Save cleaned dataset for future use
+df.to_csv('netflix_cleaned.csv', index=False)
+
+print("Analysis complete.")
